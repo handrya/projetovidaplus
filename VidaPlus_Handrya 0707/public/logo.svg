@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Símbolo do coração -->
+  <path d="M20 32C20 32 8 24 8 16C8 12 12 8 16 8C18 8 20 9.5 20 11C20 9.5 22 8 24 8C28 8 32 12 32 16C32 24 20 32 20 32Z" fill="#EC4899"/>
+  
+  <!-- Símbolo do plus -->
+  <path d="M18 12H22V16H26V20H22V24H18V20H14V16H18V12Z" fill="white"/>
+  
+  <!-- Texto VidaPlus -->
+  <text x="42" y="25" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="#1F2329">
+    Vida<tspan fill="#EC4899">Plus</tspan>
+  </text>
+</svg> 

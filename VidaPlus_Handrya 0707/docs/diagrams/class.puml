@@ -1,0 +1,130 @@
+@startuml VidaPlus Class Diagram
+
+' Estilos
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    ArrowColor #EC4899
+    BorderColor #F97316
+}
+
+' Entidades Principais
+class User {
+    +id: string
+    +name: string
+    +email: string
+    +role: UserRole
+    +createdAt: Date
+    +updatedAt: Date
+    +authenticate()
+    +updateProfile()
+}
+
+class Patient {
+    +id: string
+    +name: string
+    +birthDate: Date
+    +gender: Gender
+    +address: Address
+    +medicalHistory: MedicalHistory[]
+    +appointments: Appointment[]
+    +createAppointment()
+    +updateMedicalHistory()
+}
+
+class Doctor {
+    +id: string
+    +name: string
+    +specialty: Specialty
+    +crm: string
+    +appointments: Appointment[]
+    +schedule: Schedule
+    +createPrescription()
+    +updateSchedule()
+}
+
+class Appointment {
+    +id: string
+    +patient: Patient
+    +doctor: Doctor
+    +date: DateTime
+    +status: AppointmentStatus
+    +type: AppointmentType
+    +notes: string
+    +schedule()
+    +cancel()
+    +reschedule()
+}
+
+class MedicalRecord {
+    +id: string
+    +patient: Patient
+    +doctor: Doctor
+    +date: Date
+    +diagnosis: string
+    +prescription: Prescription
+    +notes: string
+    +addNote()
+    +updateDiagnosis()
+}
+
+class Prescription {
+    +id: string
+    +medicalRecord: MedicalRecord
+    +medications: Medication[]
+    +dosage: string
+    +duration: string
+    +instructions: string
+    +create()
+    +update()
+}
+
+class Inventory {
+    +id: string
+    +name: string
+    +category: Category
+    +quantity: number
+    +minQuantity: number
+    +location: string
+    +updateStock()
+    +checkAvailability()
+}
+
+' Relacionamentos
+User <|-- Doctor
+User <|-- Patient
+Doctor "1" -- "many" Appointment
+Patient "1" -- "many" Appointment
+Appointment "1" -- "1" MedicalRecord
+MedicalRecord "1" -- "many" Prescription
+Inventory "1" -- "many" Prescription
+
+' Enums
+enum UserRole {
+    ADMIN
+    DOCTOR
+    NURSE
+    PATIENT
+}
+
+enum Gender {
+    MALE
+    FEMALE
+    OTHER
+}
+
+enum AppointmentStatus {
+    SCHEDULED
+    CONFIRMED
+    CANCELLED
+    COMPLETED
+}
+
+enum AppointmentType {
+    CONSULTATION
+    EXAM
+    SURGERY
+    FOLLOW_UP
+}
+
+@enduml 

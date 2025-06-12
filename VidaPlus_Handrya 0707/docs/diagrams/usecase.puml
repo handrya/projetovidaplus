@@ -1,0 +1,73 @@
+@startuml Use Cases
+
+' Estilos
+skinparam usecase {
+    BackgroundColor White
+    BorderColor #F97316
+    ArrowColor #EC4899
+}
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor Patient
+actor Doctor
+actor Admin
+actor Nurse
+
+rectangle "VidaPlus System" {
+    usecase "Autenticação" as UC1
+    usecase "Gerenciar Perfil" as UC2
+    usecase "Agendar Consulta" as UC3
+    usecase "Gerenciar Prontuário" as UC4
+    usecase "Emitir Receita" as UC5
+    usecase "Gerenciar Estoque" as UC6
+    usecase "Visualizar Dashboard" as UC7
+    usecase "Gerenciar Usuários" as UC8
+    usecase "Registrar Atendimento" as UC9
+    usecase "Gerar Relatórios" as UC10
+}
+
+' Relacionamentos
+Patient --> UC1
+Patient --> UC2
+Patient --> UC3
+Patient --> UC7
+
+Doctor --> UC1
+Doctor --> UC2
+Doctor --> UC3
+Doctor --> UC4
+Doctor --> UC5
+Doctor --> UC7
+Doctor --> UC9
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC6
+Admin --> UC7
+Admin --> UC8
+Admin --> UC10
+
+Nurse --> UC1
+Nurse --> UC2
+Nurse --> UC4
+Nurse --> UC6
+Nurse --> UC7
+Nurse --> UC9
+
+' Inclusões
+UC3 ..> UC1 : <<include>>
+UC4 ..> UC1 : <<include>>
+UC5 ..> UC1 : <<include>>
+UC6 ..> UC1 : <<include>>
+UC8 ..> UC1 : <<include>>
+UC9 ..> UC1 : <<include>>
+UC10 ..> UC1 : <<include>>
+
+' Extensões
+UC3 <.. UC5 : <<extend>>
+UC4 <.. UC5 : <<extend>>
+UC7 <.. UC10 : <<extend>>
+
+@enduml 

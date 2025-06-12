@@ -1,0 +1,46 @@
+@startuml Appointment Flow
+
+' Estilos
+skinparam sequence {
+    ArrowColor #EC4899
+    LifeLineBorderColor #F97316
+    ParticipantBorderColor #F97316
+    ParticipantBackgroundColor White
+}
+
+actor Patient
+participant "Appointment\nService" as Service
+participant "Doctor\nService" as Doctor
+participant "Notification\nService" as Notification
+database "Database" as DB
+
+Patient -> Service: Solicitar agendamento
+activate Service
+
+Service -> Doctor: Verificar disponibilidade
+activate Doctor
+Doctor --> Service: Retornar horários disponíveis
+deactivate Doctor
+
+Service -> Patient: Mostrar horários disponíveis
+Patient -> Service: Selecionar horário
+Service -> DB: Verificar conflitos
+activate DB
+DB --> Service: Confirmar disponibilidade
+deactivate DB
+
+Service -> DB: Criar agendamento
+activate DB
+DB --> Service: Confirmar criação
+deactivate DB
+
+Service -> Notification: Enviar confirmação
+activate Notification
+Notification -> Patient: Notificar agendamento
+Notification --> Service: Confirmar envio
+deactivate Notification
+
+Service --> Patient: Confirmar agendamento
+deactivate Service
+
+@enduml 
